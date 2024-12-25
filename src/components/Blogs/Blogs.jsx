@@ -10,12 +10,9 @@ const Blogs = () => {
   }, []);
   return (
     <div>
-      <h1>Blogs:{blogs.length}</h1>
-      <div>
-        {blogs.map((blog) => (
-          <Blog key={blog.id} blog={blog}></Blog>
-        ))}
-      </div>
+      {blogs.map((blog) => (
+        <Blog key={blog.id} blog={blog}></Blog>
+      ))}
     </div>
   );
 };
