@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
+import { BsBookmarksFill } from "react-icons/bs";
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, handleToBokkmarks, handleReadMark }) => {
   const {
     cover,
     author_img,
@@ -11,9 +12,9 @@ const Blog = ({ blog }) => {
     hashtags,
   } = blog;
   return (
-    <div className="w-2/3">
-      <img src={cover} alt="" />
-      <div className="flex justify-between">
+    <div className=" mb-20">
+      <img className="w-full mb-8" src={cover} alt="" />
+      <div className="flex justify-between mb-4">
         <div className="flex gap-6">
           <img className="w-14" src={author_img} alt="" />
           <div>
@@ -22,12 +23,16 @@ const Blog = ({ blog }) => {
           </div>
         </div>
         <div>
-          <p>
-            <span>{reading_time}</span> min red
-          </p>
+          <span>{reading_time}</span> min red
+          <button
+            className="ml-4 text-2xl"
+            onClick={() => handleToBokkmarks(blog)}
+          >
+            <BsBookmarksFill />
+          </button>
         </div>
       </div>
-      <div>
+      <div className="mb-6">
         <h2 className="text-4xl font-bold">{title}</h2>
       </div>
 
@@ -39,10 +44,20 @@ const Blog = ({ blog }) => {
           </span>
         ))}
       </p>
+      <div>
+        <button
+          onClick={() => handleReadMark(reading_time)}
+          className="text-purple-400 text-xl underline"
+        >
+          ReadAsMark
+        </button>
+      </div>
     </div>
   );
 };
 Blog.propTypes = {
   blog: PropTypes.object.isRequired,
+  handleToBokkmarks: PropTypes.func,
+  handleReadMark: PropTypes.func,
 };
 export default Blog;

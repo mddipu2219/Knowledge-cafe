@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Blog from "../Blog/Blog";
-const Blogs = () => {
+import PropTypes from "prop-types";
+const Blogs = ({ handleToBokkmarks, handleReadMark }) => {
   const [blogs, setBlogs] = useState([]);
   useEffect(() => {
     fetch("blogs.json")
@@ -9,12 +10,20 @@ const Blogs = () => {
       .then((data) => setBlogs(data));
   }, []);
   return (
-    <div>
+    <div className="w-2/3 rounded-xl ml-5">
       {blogs.map((blog) => (
-        <Blog key={blog.id} blog={blog}></Blog>
+        <Blog
+          key={blog.id}
+          blog={blog}
+          handleToBokkmarks={handleToBokkmarks}
+          handleReadMark={handleReadMark}
+        ></Blog>
       ))}
     </div>
   );
 };
-
+Blogs.propTypes = {
+  handleToBokkmarks: PropTypes.func,
+  handleReadMark: PropTypes.func,
+};
 export default Blogs;
